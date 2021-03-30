@@ -17,7 +17,7 @@ namespace stdx::detail
   public:
     static constexpr auto reverse()
     {
-      return list_type::create_empty().push_front(std::declval<Ts>()...);
+      return list_type::create_empty().push_front(Ts{}...);
     }
   };
 }

@@ -2,6 +2,7 @@
 #define STDX_BITS_SORT_H
 
 #include <type_traits.h>
+#include <functional>
 
 namespace stdx::detail
 {
@@ -22,7 +23,7 @@ namespace stdx::detail
       }
       else
       {
-        return sort_impl<decltype(list_type::create_empty())>(comp, std::declval<Ts>()...);
+        return sort_impl<decltype(list_type::create_empty())>(comp, Ts()...);
       }
     }
 
@@ -31,7 +32,8 @@ namespace stdx::detail
     template<typename L, typename Compare, typename T1Sort, typename... TsSort>
     static constexpr auto sort_impl(Compare comp, T1Sort, TsSort... ts)
     {
-      constexpr auto index = L::find_if([comp](auto t) { return std::invoke(comp, T1Sort{}, t) <= 0; });
+      constexpr auto predicate = [comp](auto t) constexpr -> bool { return comp(T1Sort{}, t) <= 0; };
+      constexpr auto index = L::template find_if(predicate);
       constexpr auto inserted_list = L::template insert<index, T1Sort>();
       return sort_impl<decltype(inserted_list)>(comp, ts...);
     }

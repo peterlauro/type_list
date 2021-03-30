@@ -9,7 +9,7 @@ namespace stdx::detail
     template<typename List>
     struct find_last_not_of_mixin
     {
-      template<typename T, std::size_t Pos = List::empty() ? 0U : List::size() - 1U>
+      template<typename T, std::size_t Pos>
       static constexpr auto find_last_not_of()
       {
         if constexpr (List::empty() || Pos >= List::size())
@@ -24,6 +24,12 @@ namespace stdx::detail
         {
           return Pos == 0U ? List::npos : List::template find_last_not_of<T, Pos - 1U>();
         }
+      }
+
+      template<typename T>
+      static constexpr auto find_last_not_of()
+      {
+        return List::template find_last_not_of<T, List::empty() ? 0U : List::size() - 1U>();
       }
 
       template<std::size_t Pos, typename T>

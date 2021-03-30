@@ -2,6 +2,7 @@
 #define STDX_BITS_FINDIF_H
 
 #include <cstdlib>
+#include <functional>
 #include <type_traits.h>
 
 namespace stdx::detail
@@ -15,9 +16,18 @@ namespace stdx::detail
     using list_type = List<Ts...>;
 
     template<
+      typename UnaryPredicate
+      // , typename = std::enable_if_t<(stdx::is_constexpr_invocable_r_v<bool, UnaryPredicate, Ts> && ...)>
+    >
+    static constexpr auto find_if(UnaryPredicate p)
+    {
+      return list_type::template find_if<0U>(p);
+    }
+
+    template<
       std::size_t Pos,
-      typename UnaryPredicate,
-      typename = std::enable_if_t<(stdx::is_constexpr_invocable_r_v<bool, UnaryPredicate, Ts> && ...)>
+      typename UnaryPredicate
+      //, typename = std::enable_if_t<(stdx::is_constexpr_invocable_r_v<bool, UnaryPredicate, Ts> && ...)>
     >
     static constexpr auto find_if(UnaryPredicate p)
     {
@@ -33,15 +43,6 @@ namespace stdx::detail
       {
         return list_type::template find_if<Pos + 1U>(p);
       }
-    }
-
-    template<
-      typename UnaryPredicate,
-      typename = std::enable_if_t<(stdx::is_constexpr_invocable_r_v<bool, UnaryPredicate, Ts> && ...)>
-    >
-    static constexpr auto find_if(UnaryPredicate p)
-    {
-      return list_type::template find_if<0U>(p);
     }
   };
 }

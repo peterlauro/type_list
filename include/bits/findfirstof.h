@@ -9,7 +9,7 @@ namespace stdx::detail
     template<typename List>
     struct find_first_of_mixin
     {
-      template<typename T, std::size_t Pos = 0U>
+      template<typename T, std::size_t Pos>
       static constexpr auto find_first_of()
       {
         if constexpr (List::empty() || Pos >= List::size())
@@ -24,6 +24,12 @@ namespace stdx::detail
         {
           return List::template find_first_of<T, Pos + 1U>();
         }
+      }
+
+      template<typename T>
+      static constexpr auto find_first_of()
+      {
+        return List::template find_first_of<T, 0U>();
       }
 
       template<std::size_t Pos, typename T>

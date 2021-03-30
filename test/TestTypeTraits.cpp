@@ -16,7 +16,8 @@ namespace stdx::test
 
   struct literal_derived : literal
   {
-    constexpr literal_derived() noexcept(false) = default;
+    constexpr literal_derived() noexcept(false)
+    {}
   };
 
   struct non_literal

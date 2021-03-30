@@ -41,10 +41,10 @@ namespace stdx::test
     static_assert(my_list_type::find_if<my_list_type::size()>([](auto x) { return true; }) == my_empty_list_type::npos);
   }
 
+  constexpr auto predicate = [](auto x) constexpr -> bool {return x.value == 1; };
+
   TEST(TypeList_Find_If, find_value_1)
   {
-    static constexpr auto searched_value = 1;
-    constexpr auto predicate = [](auto x) constexpr {return decltype(x)::value == searched_value; };
     auto val = 0;
     if constexpr (my_list_type::find_if(predicate) == 2U)
     {

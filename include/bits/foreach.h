@@ -2,6 +2,7 @@
 #define STDX_BITS_FOREACH_H
 
 #include <type_traits>
+#include <utility>
 
 namespace stdx::detail
 {

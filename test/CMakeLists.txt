@@ -26,6 +26,7 @@ set(TARGET_TESTS_SOURCES
     TestSecond.cpp
     TestSort.cpp
     TestSplit.cpp
+    TestTypeList.cpp
     TestTypeTraits.cpp
     TestUnique.cpp
     )

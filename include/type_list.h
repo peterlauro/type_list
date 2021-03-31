@@ -158,6 +158,9 @@ namespace stdx
   {
     return {};
   }
+
+  template<typename... Ts>
+  type_list(Ts...) -> type_list<Ts...>;
 }
 
 #endif

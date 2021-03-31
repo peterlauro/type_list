@@ -10,6 +10,12 @@ namespace stdx::test
     constexpr static int value = val;
   };
 
+  constexpr auto descent_comparer =
+    [](auto tx, auto ty) constexpr -> decltype(tx.value - ty.value) {return tx.value - ty.value; };
+
+  constexpr auto ascent_comparer =
+    [](auto tx, auto ty) constexpr -> decltype(ty.value - tx.value) {return ty.value - tx.value; };
+
   using literal_t0 = literal<0>;
   using literal_t1 = literal<1>;
   using literal_t2 = literal<2>;
@@ -61,12 +67,6 @@ namespace stdx::test
   >;
 
   using my_empty_list_type = stdx::type_list<>;
-
-  constexpr auto descent_comparer =
-    [](auto tx, auto ty) constexpr -> decltype(tx.value - ty.value) {return tx.value - ty.value; };
-
-  constexpr auto ascent_comparer =
-    [](auto tx, auto ty) constexpr -> decltype(ty.value - tx.value) {return ty.value - tx.value; };
 
   TEST(TypeList_Sort, empty_list_type)
   {

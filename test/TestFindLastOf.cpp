@@ -31,6 +31,7 @@ namespace stdx::test
   TEST(TypeList_Find_Last_Of, list_two_types)
   {
     constexpr auto i = my_list_two_types::find_last_of<int>();
+    EXPECT_EQ(i, 0U);
     static_assert(my_list_two_types::find_last_of<int>() == 0U);
     static_assert(my_list_two_types::find_last_of<int, my_list_two_types::size() - 1U>() == 0U);
     static_assert(my_list_two_types::find_last_of<double, my_list_two_types::size() - 1U>() == 1U);
@@ -41,6 +42,7 @@ namespace stdx::test
   TEST(TypeList_Find_Last_Of, my_list_type)
   {
     constexpr auto i = my_list_type::find_last_of<int>();
+    EXPECT_EQ(i, 4U);
     static_assert(my_list_type::find_last_of<int>() == 4U);
     static_assert(my_list_type::find_last_of<int, my_list_type::size() - 1U>() == 4U);
     static_assert(my_list_type::find_last_of<int, 3U>() == 0U);

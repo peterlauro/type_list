@@ -1,10 +1,10 @@
 ﻿cmake_minimum_required (VERSION 3.14)
 
-project ("type_list")
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+
+project ("type_list")
 
 include(cmake/googletest.cmake)
 

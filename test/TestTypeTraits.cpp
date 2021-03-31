@@ -1,17 +1,21 @@
 #include <type_traits.h>
 #include <gtest/gtest.h>
 
-#include <string>
-
 namespace stdx::test
 {
+  struct not_literal
+  {
+    not_literal(){}
+    ~not_literal(){}
+  };
+
   struct literal
   {
     constexpr literal() noexcept = default;
     constexpr literal(const int&, double) {}
     constexpr literal(int&&, double) {}
     constexpr literal(int&, double) {}
-    literal(int, std::string) {}
+    literal(int, not_literal) {}
   };
 
   struct literal_derived : literal
@@ -20,13 +24,7 @@ namespace stdx::test
     {}
   };
 
-  struct non_literal
-  {
-    non_literal() = default;
-    std::string m;
-  };
-
-  struct non_literal_derived : non_literal
+  struct non_literal_derived : not_literal
   {
     non_literal_derived() = default;
   };
@@ -92,9 +90,9 @@ namespace stdx::test
 
   TEST(TypeTraits_is_constexpr_default_constructible, non_literal_type)
   {
-    static_assert(!is_constexpr_default_constructible_v<non_literal>);
+    static_assert(!is_constexpr_default_constructible_v<not_literal>);
     int c = 0;
-    if constexpr (!is_constexpr_default_constructible_v<non_literal>)
+    if constexpr (!is_constexpr_default_constructible_v<not_literal>)
     {
       c = 10;
     }
@@ -191,17 +189,17 @@ namespace stdx::test
     return l;
   }
 
-  std::string func2()
-  {
-    return "";
-  }
-
-  literal func3(std::string)
+  not_literal func2()
   {
     return {};
   }
 
-  literal func5(literal, std::string)
+  literal func3(not_literal)
+  {
+    return {};
+  }
+
+  literal func5(literal, not_literal)
   {
     return {};
   }
@@ -209,7 +207,7 @@ namespace stdx::test
   TEST(TypeTraits_is_constexpr_invocable, free_standing_function)
   {
     int v = 0;
-    if constexpr (is_constexpr_invocable_r_v<std::string, decltype(func2)>)
+    if constexpr (is_constexpr_invocable_r_v<not_literal, decltype(func2)>)
     {
       ++v;
     }
@@ -221,11 +219,11 @@ namespace stdx::test
     {
       ++v;
     }
-    if constexpr (is_constexpr_invocable_r_v<literal, decltype(func3), std::string>)
+    if constexpr (is_constexpr_invocable_r_v<literal, decltype(func3), not_literal>)
     {
       ++v;
     }
-    if constexpr (is_constexpr_invocable_r_v<literal, decltype(func5), literal, std::string>)
+    if constexpr (is_constexpr_invocable_r_v<literal, decltype(func5), literal, not_literal>)
     {
       ++v;
     }
@@ -233,9 +231,9 @@ namespace stdx::test
 
     static_assert(is_constexpr_invocable_r_v<literal, decltype(func)>);
     static_assert(is_constexpr_invocable_r_v<literal, decltype(func4), literal>);
-    static_assert(!is_constexpr_invocable_r_v<literal, decltype(func3), std::string>);
-    static_assert(!is_constexpr_invocable_r_v<std::string, decltype(func2)>);
-    static_assert(!is_constexpr_invocable_r_v<literal, decltype(func5), literal, std::string>);
+    static_assert(!is_constexpr_invocable_r_v<literal, decltype(func3), not_literal>);
+    static_assert(!is_constexpr_invocable_r_v<not_literal, decltype(func2)>);
+    static_assert(!is_constexpr_invocable_r_v<literal, decltype(func5), literal, not_literal>);
   }
 
   TEST(TypeTraits_is_constexpr_invocable, lambda)
@@ -243,7 +241,7 @@ namespace stdx::test
     constexpr auto lambda1 = [](int x) constexpr-> decltype(x < 5) {return x < 5; };
     constexpr auto lambda2 = []() constexpr { return true; };
     constexpr auto lambda3 = [](literal l) constexpr { return l; };
-    constexpr auto lambda4 = [](literal l, std::string) { return l; };
+    constexpr auto lambda4 = [](literal l, not_literal) { return l; };
     int v = 0;
     if constexpr (is_constexpr_invocable_r_v<bool, decltype(lambda1), int>)
     {
@@ -257,7 +255,7 @@ namespace stdx::test
     {
       ++v;
     }
-    if constexpr (is_constexpr_invocable_r_v<literal, decltype(lambda4), literal, std::string>)
+    if constexpr (is_constexpr_invocable_r_v<literal, decltype(lambda4), literal, not_literal>)
     {
       ++v;
     }
@@ -266,6 +264,6 @@ namespace stdx::test
     static_assert(is_constexpr_invocable_r_v<bool, decltype(lambda1), int>);
     static_assert(is_constexpr_invocable_r_v<bool, decltype(lambda2)>);
     static_assert(is_constexpr_invocable_r_v<literal, decltype(lambda3), literal>);
-    static_assert(!is_constexpr_invocable_r_v<literal, decltype(lambda4), literal, std::string>);
+    static_assert(!is_constexpr_invocable_r_v<literal, decltype(lambda4), literal, not_literal>);
   }
 }

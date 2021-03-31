@@ -31,6 +31,7 @@ namespace stdx::test
   TEST(TypeList_Find_Last_Not_Of, list_two_types)
   {
     constexpr auto i = my_list_two_types::find_last_not_of<int>();
+    EXPECT_EQ(i, 1U);
     static_assert(my_list_two_types::find_last_not_of<int>() == my_list_two_types::size() - 1U);
     static_assert(my_list_two_types::find_last_not_of<int, my_list_two_types::size() - 1U>() == 1U);
     static_assert(my_list_two_types::find_last_not_of<double, my_list_two_types::size() - 1U>() == 0U);
@@ -41,6 +42,7 @@ namespace stdx::test
   TEST(TypeList_Find_Last_Not_Of, my_list_type)
   {
     constexpr auto i = my_list_type::find_last_not_of<int>();
+    EXPECT_EQ(i, 6U);
     static_assert(my_list_type::find_last_not_of<int>() == my_list_type::size() - 1U);
     static_assert(my_list_type::find_last_not_of<int, my_list_type::size() - 1U>() == my_list_type::size() - 1U);
     static_assert(my_list_type::find_last_not_of<int, 3U>() == 3U);

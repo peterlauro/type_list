@@ -16,20 +16,20 @@ namespace stdx::detail
     using list_type = List<Ts...>;
 
     template<
-      typename UnaryPredicate
-      // , typename = std::enable_if_t<(stdx::is_constexpr_invocable_r_v<bool, UnaryPredicate, Ts> && ...)>
+      typename UnaryPredicate,
+      typename = std::enable_if_t<(stdx::is_constexpr_invocable_r_v<bool, UnaryPredicate, Ts> && ...)>
     >
-    static constexpr auto find_if(UnaryPredicate p)
+    static constexpr std::size_t find_if(UnaryPredicate p)
     {
       return list_type::template find_if<0U>(p);
     }
 
     template<
       std::size_t Pos,
-      typename UnaryPredicate
-      //, typename = std::enable_if_t<(stdx::is_constexpr_invocable_r_v<bool, UnaryPredicate, Ts> && ...)>
+      typename UnaryPredicate,
+      typename = std::enable_if_t<(stdx::is_constexpr_invocable_r_v<bool, UnaryPredicate, Ts> && ...)>
     >
-    static constexpr auto find_if(UnaryPredicate p)
+    static constexpr std::size_t find_if(UnaryPredicate p)
     {
       if constexpr (list_type::empty() || Pos >= list_type::size())
       {

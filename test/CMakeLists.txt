@@ -22,6 +22,7 @@ set(TARGET_TESTS_SOURCES
     TestPushBack.cpp
     TestPushFront.cpp
     TestRemove.cpp
+    TestRemoveIf.cpp
     TestReverse.cpp
     TestSecond.cpp
     TestSort.cpp

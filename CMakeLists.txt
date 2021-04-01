@@ -60,6 +60,7 @@ set(INTERFACE_SOURCES
     ${TARGET_INCLUDE_DIR}/bits/pushback.h
     ${TARGET_INCLUDE_DIR}/bits/pushfront.h
     ${TARGET_INCLUDE_DIR}/bits/remove.h
+    ${TARGET_INCLUDE_DIR}/bits/removeif.h
     ${TARGET_INCLUDE_DIR}/bits/reverse.h
     ${TARGET_INCLUDE_DIR}/bits/second.h
     ${TARGET_INCLUDE_DIR}/bits/split.h

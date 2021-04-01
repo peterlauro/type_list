@@ -84,7 +84,7 @@ namespace stdx
     struct is_constexpr_invocable_
     {
       // not a perfect check
-      // detect only whether the return type and argument types are literal ones.
+      // it tests only whether the return type and argument types are literal ones.
       template<typename U, typename... UArgs>
       static constexpr auto init(tag_t<R, U, UArgs...>)
         -> decltype(void(R()), void(UArgs()...), 0)

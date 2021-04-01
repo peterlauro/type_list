@@ -3,29 +3,17 @@
 
 namespace stdx::test
 {
-  struct literal_t1
+  template<int Value>
+  struct literal_type
   {
-    constexpr literal_t1() = default;
-    constexpr static int value = 1;
+    constexpr literal_type() = default;
+    constexpr static int value = Value;
   };
 
-  struct literal_t2
-  {
-    constexpr literal_t2() = default;
-    constexpr static int value = 2;
-  };
-
-  struct literal_t3
-  {
-    constexpr literal_t3() = default;
-    constexpr static int value = 3;
-  };
-
-  struct literal_t4
-  {
-    constexpr literal_t4() = default;
-    constexpr static int value = 4;
-  };
+  using literal_t1 = literal_type<1>;
+  using literal_t2 = literal_type<2>;
+  using literal_t3 = literal_type<3>;
+  using literal_t4 = literal_type<4>;
 
   using my_list_type = stdx::type_list<literal_t2, literal_t3, literal_t1, literal_t4, literal_t2>;
   using my_empty_list_type = stdx::type_list<>;

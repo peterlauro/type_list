@@ -69,4 +69,85 @@ namespace stdx::test
     using t0 = decltype(my_empty_list_type::remove());
     static_assert(std::is_same_v<t0, stdx::type_list<>>);
   }
+
+  TEST(TypeList_Remove, by_index_empty_list_type)
+  {
+    using t0 = decltype(my_empty_list_type::remove<0U>());
+    static_assert(std::is_same_v<t0, stdx::type_list<>>);
+  }
+
+  TEST(TypeList_Remove, by_index_out_of_range)
+  {
+    using t0 = decltype(my_list_two_types::remove<5U>());
+    static_assert(std::is_same_v<t0, my_list_two_types>);
+  }
+
+  TEST(TypeList_Remove, by_index)
+  {
+    {
+      using t0 = decltype(my_list_types::remove<0>());
+      static_assert(std::is_same_v<t0, stdx::type_list<double, literal_type, char, int>>);
+      int val = 0;
+      if constexpr (std::is_same_v<t0, stdx::type_list<double, literal_type, char, int>>)
+      {
+        ++val;
+      }
+      EXPECT_EQ(val, 1);
+    }
+
+    {
+      using t1 = decltype(my_list_types::remove<1U>());
+      static_assert(std::is_same_v<t1, stdx::type_list<int, literal_type, char, int>>);
+      int val = 0;
+      if constexpr (std::is_same_v<t1, stdx::type_list<int, literal_type, char, int>>)
+      {
+        ++val;
+      }
+      EXPECT_EQ(val, 1);
+    }
+
+    {
+      using t2 = decltype(my_list_types::remove<2U>());
+      static_assert(std::is_same_v<t2, stdx::type_list<int, double, char, int>>);
+      int val = 0;
+      if constexpr (std::is_same_v<t2, stdx::type_list<int, double, char, int>>)
+      {
+        ++val;
+      }
+      EXPECT_EQ(val, 1);
+    }
+
+    {
+      using t3 = decltype(my_list_types::remove<3U>());
+      static_assert(std::is_same_v<t3, stdx::type_list<int, double, literal_type, int>>);
+      int val = 0;
+      if constexpr (std::is_same_v<t3, stdx::type_list<int, double, literal_type, int>>)
+      {
+        ++val;
+      }
+      EXPECT_EQ(val, 1);
+    }
+
+    {
+      using t4 = decltype(my_list_types::remove<4U>());
+      static_assert(std::is_same_v<t4, stdx::type_list<int, double, literal_type, char>>);
+      int val = 0;
+      if constexpr (std::is_same_v<t4, stdx::type_list<int, double, literal_type, char>>)
+      {
+        ++val;
+      }
+      EXPECT_EQ(val, 1);
+    }
+
+    {
+      using t5 = decltype(my_list_types::remove<5U>());
+      static_assert(std::is_same_v<t5, stdx::type_list<int, double, literal_type, char, int>>);
+      int val = 0;
+      if constexpr (std::is_same_v<t5, stdx::type_list<int, double, literal_type, char, int>>)
+      {
+        ++val;
+      }
+      EXPECT_EQ(val, 1);
+    }
+  }
 }

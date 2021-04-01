@@ -35,14 +35,35 @@ namespace stdx::detail
       {
         return list_type::create_empty();
       }
-
-      if constexpr(listRemove.template contains<decltype(list_type::front())>())
+      else if constexpr(listRemove.template contains<decltype(list_type::front())>())
       {
         return list_type::pop_front().remove(listRemove);
       }
       else
       {
         return list_type::create_empty().push_back(list_type::front()).push_back(list_type::pop_front().remove(listRemove));
+      }
+    }
+
+    template<std::size_t Idx>
+    static constexpr auto remove()
+    {
+      if constexpr (list_type::empty())
+      {
+        return list_type::create_empty();
+      }
+      else if constexpr (list_type::size() <= Idx)
+      {
+        return list_type{};
+      }
+      else if constexpr (Idx == 0U)
+      {
+        return list_type::pop_front();
+      }
+      else
+      {
+        constexpr auto rest = list_type::pop_front().template remove<Idx - 1U>();
+        return list_type::create(list_type::front()).push_back(rest);
       }
     }
   };

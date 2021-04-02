@@ -1,8 +1,6 @@
 #ifndef STDX_BITS_REPLACEIF_H
 #define STDX_BITS_REPLACEIF_H
 
-#include <cstdlib>
-
 namespace stdx::detail
 {
   template<typename List>

@@ -1,6 +1,8 @@
 #ifndef STDX_BITS_REMOVE_H
 #define STDX_BITS_REMOVE_H
 
+#include <cstdlib>
+
 namespace stdx::detail
 {
   template<typename List>
@@ -16,32 +18,32 @@ namespace stdx::detail
       return list_type{};
     }
 
-    template<typename T1, typename... TsRemove>
+    template<typename TRemove, typename... TsRemove>
     static constexpr auto remove()
     {
-      return remove(list_type::template create<T1, TsRemove...>());
+      return remove(list_type::template create<TRemove, TsRemove...>());
     }
 
-    template<typename T1, typename... TsRemove>
-    static constexpr auto remove(T1 t1, TsRemove... ts)
+    template<typename TRemove, typename... TsRemove>
+    static constexpr auto remove(TRemove t1, TsRemove... ts)
     {
       return remove(list_type::create(t1, ts...));
     }
 
     template<typename... TsRemove>
-    static constexpr auto remove(List<TsRemove...> listRemove)
+    static constexpr auto remove(List<TsRemove...> removeList)
     {
       if constexpr(list_type::empty())
       {
         return list_type::create_empty();
       }
-      else if constexpr(listRemove.template contains<decltype(list_type::front())>())
+      else if constexpr(removeList.template contains<decltype(list_type::front())>())
       {
-        return list_type::pop_front().remove(listRemove);
+        return list_type::pop_front().remove(removeList);
       }
       else
       {
-        return list_type::create_empty().push_back(list_type::front()).push_back(list_type::pop_front().remove(listRemove));
+        return list_type::create_empty().push_back(list_type::front()).push_back(list_type::pop_front().remove(removeList));
       }
     }
 

@@ -61,8 +61,11 @@ set(INTERFACE_SOURCES
     ${TARGET_INCLUDE_DIR}/bits/pushfront.h
     ${TARGET_INCLUDE_DIR}/bits/remove.h
     ${TARGET_INCLUDE_DIR}/bits/removeif.h
+    ${TARGET_INCLUDE_DIR}/bits/replace.h
+    ${TARGET_INCLUDE_DIR}/bits/replaceif.h
     ${TARGET_INCLUDE_DIR}/bits/reverse.h
     ${TARGET_INCLUDE_DIR}/bits/second.h
+    ${TARGET_INCLUDE_DIR}/bits/sort.h
     ${TARGET_INCLUDE_DIR}/bits/split.h
     ${TARGET_INCLUDE_DIR}/bits/unique.h
     )

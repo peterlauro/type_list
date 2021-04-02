@@ -22,6 +22,8 @@
 #include <bits/pushfront.h>
 #include <bits/remove.h>
 #include <bits/removeif.h>
+#include <bits/replace.h>
+#include <bits/replaceif.h>
 #include <bits/reverse.h>
 #include <bits/second.h>
 #include <bits/sort.h>
@@ -68,6 +70,8 @@ namespace stdx
       , push_front_mixin<List<Ts...>>
       , remove_mixin<List<Ts...>>
       , remove_if_mixin<List<Ts...>>
+      , replace_mixin<List<Ts...>>
+      , replace_if_mixin<List<Ts...>>
       , reverse_mixin<List<Ts...>>
       , second_mixin<List<Ts...>>
       , sort_mixin<List<Ts...>>

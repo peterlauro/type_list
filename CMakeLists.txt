@@ -67,6 +67,7 @@ set(INTERFACE_SOURCES
     ${TARGET_INCLUDE_DIR}/bits/second.h
     ${TARGET_INCLUDE_DIR}/bits/sort.h
     ${TARGET_INCLUDE_DIR}/bits/split.h
+    ${TARGET_INCLUDE_DIR}/bits/transform.h
     ${TARGET_INCLUDE_DIR}/bits/unique.h
     )
 

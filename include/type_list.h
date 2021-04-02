@@ -28,6 +28,7 @@
 #include <bits/second.h>
 #include <bits/sort.h>
 #include <bits/split.h>
+#include <bits/transform.h>
 #include <bits/unique.h>
 
 #include <type_traits.h>
@@ -76,6 +77,7 @@ namespace stdx
       , second_mixin<List<Ts...>>
       , sort_mixin<List<Ts...>>
       , split_mixin<List<Ts...>>
+      , transform_mixin<List<Ts...>>
       , unique_mixin<List<Ts...>>
     {
       static_assert((is_constexpr_default_constructible_v<Ts> && ...),

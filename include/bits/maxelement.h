@@ -6,21 +6,16 @@
 namespace stdx::detail
 {
   template<typename List>
-  struct max_element_mixin;
-
-  template<template<typename...> typename List, typename... Ts>
-  struct max_element_mixin<List<Ts...>>
+  struct max_element_mixin
   {
-    using list_type = List<Ts...>;
-
     template<class Compare>
     static constexpr std::size_t max_element(Compare comp)
     {
-      if constexpr (list_type::empty())
+      if constexpr (List::empty())
       {
-        return list_type::npos;
+        return List::npos;
       }
-      else if constexpr (list_type::size() == 1U)
+      else if constexpr (List::size() == 1U)
       {
         return 0U;
       }
@@ -34,9 +29,9 @@ namespace stdx::detail
     template<std::size_t LargestIdx, std::size_t Idx, typename Compare>
     static constexpr std::size_t max_element_impl(Compare comp)
     {
-      if constexpr (Idx < list_type::size())
+      if constexpr (Idx < List::size())
       {
-        if constexpr (comp(list_type::template get<LargestIdx>(), list_type::template get<Idx>()))
+        if constexpr (comp(List::template get<LargestIdx>(), List::template get<Idx>()))
         {
           return max_element_impl<Idx, Idx + 1U>(comp);
         }

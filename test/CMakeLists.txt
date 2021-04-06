@@ -13,6 +13,7 @@ set(TARGET_TESTS_SOURCES
     TestFindIfNot.cpp
     TestFindLastNotOf.cpp
     TestFindLastOf.cpp
+    TestFindTemplate.cpp
     TestFlatten.cpp
     TestFront.cpp
     TestGet.cpp

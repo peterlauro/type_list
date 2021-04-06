@@ -43,7 +43,7 @@ namespace stdx::detail
       }
       else
       {
-        return list_type::create_empty().push_back(list_type::front()).push_back(list_type::pop_front().remove(removeList));
+        return list_type::create(list_type::front()).push_back(list_type::pop_front().remove(removeList));
       }
     }
 

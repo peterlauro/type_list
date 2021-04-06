@@ -50,6 +50,7 @@ set(INTERFACE_SOURCES
     ${TARGET_INCLUDE_DIR}/bits/findifnot.h
     ${TARGET_INCLUDE_DIR}/bits/findlastnotof.h
     ${TARGET_INCLUDE_DIR}/bits/findlastof.h
+    ${TARGET_INCLUDE_DIR}/bits/findtemplate.h
     ${TARGET_INCLUDE_DIR}/bits/flatten.h
     ${TARGET_INCLUDE_DIR}/bits/foreach.h
     ${TARGET_INCLUDE_DIR}/bits/front.h

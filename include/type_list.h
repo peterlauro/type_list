@@ -11,6 +11,7 @@
 #include <bits/findifnot.h>
 #include <bits/findlastnotof.h>
 #include <bits/findlastof.h>
+#include <bits/findtemplate.h>
 #include <bits/flatten.h>
 #include <bits/foreach.h>
 #include <bits/front.h>
@@ -60,6 +61,7 @@ namespace stdx
       , find_if_not_mixin<List<Ts...>>
       , find_last_not_of_mixin<List<Ts...>>
       , find_last_of_mixin<List<Ts...>>
+      , find_template_mixin<List<Ts...>>
       , flatten_mixin<List<Ts...>>
       , for_each_mixin<List<Ts...>>
       , front_mixin<List<Ts...>>

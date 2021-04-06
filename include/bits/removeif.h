@@ -21,7 +21,7 @@ namespace stdx::detail
     {
       if constexpr (list_type::empty())
       {
-        return list_type::create_empty();
+        return list_type{};
       }
       else if constexpr (p(list_type::front()))
       {

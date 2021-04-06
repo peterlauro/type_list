@@ -56,6 +56,7 @@ set(INTERFACE_SOURCES
     ${TARGET_INCLUDE_DIR}/bits/front.h
     ${TARGET_INCLUDE_DIR}/bits/get.h
     ${TARGET_INCLUDE_DIR}/bits/insert.h
+    ${TARGET_INCLUDE_DIR}/bits/maxelement.h
     ${TARGET_INCLUDE_DIR}/bits/popback.h
     ${TARGET_INCLUDE_DIR}/bits/popfront.h
     ${TARGET_INCLUDE_DIR}/bits/pushback.h

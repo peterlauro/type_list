@@ -17,6 +17,7 @@ set(TARGET_TESTS_SOURCES
     TestFlatten.cpp
     TestFront.cpp
     TestGet.cpp
+    TestMaxElement.cpp
     TestInsert.cpp
     TestPopBack.cpp
     TestPopFront.cpp

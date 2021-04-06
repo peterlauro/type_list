@@ -17,6 +17,7 @@
 #include <bits/front.h>
 #include <bits/get.h>
 #include <bits/insert.h>
+#include <bits/maxelement.h>
 #include <bits/popback.h>
 #include <bits/popfront.h>
 #include <bits/pushback.h>
@@ -67,6 +68,7 @@ namespace stdx
       , front_mixin<List<Ts...>>
       , get_mixin<List<Ts...>>
       , insert_mixin<List<Ts...>>
+      , max_element_mixin<List<Ts...>>
       , pop_back_mixin<List<Ts...>>
       , pop_front_mixin<List<Ts...>>
       , push_back_mixin<List<Ts...>>

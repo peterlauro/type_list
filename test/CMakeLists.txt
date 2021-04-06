@@ -18,6 +18,7 @@ set(TARGET_TESTS_SOURCES
     TestFront.cpp
     TestGet.cpp
     TestMaxElement.cpp
+    TestMinElement.cpp
     TestInsert.cpp
     TestPopBack.cpp
     TestPopFront.cpp

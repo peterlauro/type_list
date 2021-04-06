@@ -35,7 +35,7 @@ namespace stdx::detail
     {
       if constexpr(list_type::empty())
       {
-        return list_type::create_empty();
+        return list_type{};
       }
       else if constexpr(removeList.template contains<decltype(list_type::front())>())
       {
@@ -52,7 +52,7 @@ namespace stdx::detail
     {
       if constexpr (list_type::empty())
       {
-        return list_type::create_empty();
+        return list_type{};
       }
       else if constexpr (list_type::size() <= Idx)
       {

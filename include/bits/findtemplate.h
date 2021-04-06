@@ -20,11 +20,11 @@ namespace stdx::detail
     {
       if constexpr (list_type::empty())
       {
-        return list_type::create_empty();
+        return list_type{};
       }
       else if constexpr ((stdx::is_same_template_v<decltype(list_type::front()), Templates> || ...))
       {
-        return list_type::create_empty().push_back(list_type::front(), list_type::pop_front().find_template(templates...));
+        return list_type::create(list_type::front()).push_back(list_type::pop_front().find_template(templates...));
       }
       else
       {

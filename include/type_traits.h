@@ -113,6 +113,38 @@ namespace stdx
   template<typename R, typename T, typename... Args>
   inline constexpr bool is_constexpr_nothrow_invocable_r_v =
     std::is_nothrow_invocable_r_v<R, T, Args...> && is_constexpr_invocable_r_v<R, T, Args...>;
+
+  //is_template;
+  //Note: it's not going to work for templates which mix template value parameter type with template type parameter type
+  template<typename>
+  inline constexpr bool is_template_v = false;
+
+  template<template<typename...> typename T, typename... As>
+  inline constexpr bool is_template_v<T<As...>> = true;
+
+  template<template<auto...> typename T, auto... As>
+  inline constexpr bool is_template_v<T<As...>> = true;
+
+  template<typename T>
+  struct is_template : std::bool_constant<is_template_v<T>>
+  {
+  };
+
+  //is_same_template; the types use the same template type
+  //Note: it's not going to work for templates which mix template value parameter type with template type parameter type
+  template<typename, typename>
+  inline constexpr bool is_same_template_v = false;
+
+  template<template<typename...> typename T, typename... As, typename... Bs>
+  inline constexpr bool is_same_template_v<T<As...>, T<Bs...>> = true;
+
+  template<template<auto...> typename T, auto... As, auto... Bs>
+  inline constexpr bool is_same_template_v<T<As...>, T<Bs...>> = true;
+
+  template<typename A, typename B>
+  struct is_same_template : std::bool_constant<is_same_template_v<A, B>>
+  {
+  };
 }
 
 #endif
